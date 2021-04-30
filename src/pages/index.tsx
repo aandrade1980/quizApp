@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import {
   Box,
   Container,
@@ -7,32 +6,35 @@ import {
   SimpleGrid,
   Text,
 } from '@chakra-ui/react';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { getAllQuiz, getAllUsers } from '@/utils/db';
 import Navbar from '@/common/Navbar';
+import { getAllQuiz, getAllUsers } from '@/utils/db';
 
-export default function Home({ quiz }) {
-  const formattedQuiz = JSON.parse(quiz);
+const Home = props => {
+  const quiz = JSON.parse(props.quiz);
   const router = useRouter();
 
-  const generateQuizCard = singleQuiz => (
-    <Box m={3} borderWidth="1px" borderRadius="lg" p={6} boxShadow="xl">
-      <Heading as="h3" size="lg">
-        {singleQuiz.title}
-      </Heading>
-      <Text color="gray.500" mt={2}>
-        Posted By: {singleQuiz.user.name}
-      </Text>
-      <Text color="gray.500" mt={2}>
-        Number of Questions: {singleQuiz.questions.length}
-      </Text>
+  const generateQuizCard = singleQuiz => {
+    return (
+      <Box m={3} borderWidth="1px" borderRadius="lg" p={6} boxShadow="xl">
+        <Heading as="h3" size="lg">
+          {singleQuiz.title}
+        </Heading>
 
-      <Divider my={3} />
+        <Text color="gray.500" mt={2}>
+          Posted By: {singleQuiz.user.name}
+        </Text>
+        <Text color="gray.500" mt={2}>
+          No of Questions: {singleQuiz.questions.length}
+        </Text>
 
-      <Text noOfLines={[1, 2, 3]}>{singleQuiz.description}</Text>
-    </Box>
-  );
+        <Divider my={3} />
+        <Text noOfLines={[1, 2, 3]}>{singleQuiz.description}</Text>
+      </Box>
+    );
+  };
 
   return (
     <Box>
@@ -44,9 +46,9 @@ export default function Home({ quiz }) {
         <header>
           <Navbar />
           <Container maxW="6xl">
-            {formattedQuiz.length > 0 && (
+            {quiz.length > 0 && (
               <SimpleGrid minChildWidth="400px">
-                {formattedQuiz.map(singleQuiz => (
+                {quiz.map(singleQuiz => (
                   <Box
                     key={singleQuiz.id}
                     onClick={() => router.push(`/quiz/${singleQuiz.id}`)}
@@ -62,18 +64,19 @@ export default function Home({ quiz }) {
           </Container>
         </header>
       </main>
-      <footer>Footer</footer>
+      <footer></footer>
     </Box>
   );
-}
+};
 
 export async function getServerSideProps(_context) {
   const quiz = await getAllQuiz();
   const users = await getAllUsers();
-  const data = quiz.map(singleQuiz => ({
+  const data = quiz.map((singleQuiz: any) => ({
     ...singleQuiz,
     user: users.find(user => user.id === singleQuiz.userId),
   }));
-
   return { props: { quiz: JSON.stringify(data) } };
 }
+
+export default Home;

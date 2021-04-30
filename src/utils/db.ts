@@ -11,7 +11,7 @@ export const addUser = async (authUser: any) => {
 };
 
 export const addQuiz = async quizData => {
-  let response = await firebase.firestore().collection('quiz').add(quizData);
+  const response = await firebase.firestore().collection('quiz').add(quizData);
 
   return response;
 };
@@ -42,9 +42,8 @@ export const getSingleQuiz = async quizId => {
     .collection('quiz')
     .doc(String(quizId))
     .get();
-  const quizData = snapShot.exists ? JSON.stringify(snapShot.data()) : null;
 
-  return quizData;
+  return snapShot.exists ? JSON.stringify(snapShot.data()) : null;
 };
 
 export const getAnswer = async answerId => {
@@ -53,9 +52,6 @@ export const getAnswer = async answerId => {
     .collection('answer')
     .doc(String(answerId))
     .get();
-  let answerData = answerSnapshot.exists
-    ? JSON.stringify(answerSnapshot.data())
-    : null;
 
-  return answerData;
+  return answerSnapshot.exists ? JSON.stringify(answerSnapshot.data()) : null;
 };
