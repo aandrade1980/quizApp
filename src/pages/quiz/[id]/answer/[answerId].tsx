@@ -14,7 +14,12 @@ import React from 'react';
 import NavBar from '@/common/Navbar';
 import { getAnswer, getSingleQuiz } from '@/utils/db';
 
-const answer = props => {
+interface IAnswerProps {
+  quiz: string;
+  answer: string;
+}
+
+const answer = (props: IAnswerProps) => {
   const quiz = JSON.parse(props.quiz);
   const answer = JSON.parse(props.answer);
 
@@ -82,15 +87,14 @@ const answer = props => {
 };
 
 export async function getServerSideProps(context: NextPageContext) {
-  const quizId = context.query.id;
-  const answerId = context.query.answerId;
-  const quizData = await getSingleQuiz(quizId);
-  const answerData = await getAnswer(answerId);
+  const { id, answerId } = context.query;
+  const quiz = await getSingleQuiz(id);
+  const answer = await getAnswer(answerId);
 
   return {
     props: {
-      answer: answerData,
-      quiz: quizData,
+      answer,
+      quiz,
     },
   };
 }

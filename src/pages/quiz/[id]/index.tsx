@@ -24,8 +24,7 @@ const ShowQuiz = (quiz, onSubmit) => {
   return (
     <Container
       maxW="7xl"
-      mt={5}
-      mb={5}
+      my={5}
       borderWidth="1px"
       borderRadius="lg"
       p={6}
@@ -58,8 +57,8 @@ const ShowQuiz = (quiz, onSubmit) => {
                     <FormLabel as="legend">{singleQuiz.title}</FormLabel>
                     <RadioGroup>
                       <SimpleGrid minChildWidth="120px" mb={2}>
-                        {singleQuiz.options.map((option, subkey) => (
-                          <HStack key={subkey}>
+                        {singleQuiz.options.map((option, index: number) => (
+                          <HStack key={index}>
                             <Field
                               {...field}
                               type="radio"
@@ -93,7 +92,6 @@ const ShowQuiz = (quiz, onSubmit) => {
 
 const SingleQuiz = props => {
   const { auth, loading } = useAuth();
-
   const router = useRouter();
 
   useEffect(() => {
@@ -126,8 +124,8 @@ const SingleQuiz = props => {
 
 export async function getServerSideProps(context: NextPageContext) {
   const quizId = context.query.id;
-  const quizData = await getSingleQuiz(quizId);
-  return { props: { quiz: quizData, quizId } };
+  const quiz = await getSingleQuiz(quizId);
+  return { props: { quiz, quizId } };
 }
 
 export default SingleQuiz;

@@ -60,7 +60,6 @@ const answerOption = [
 
 const Index = () => {
   const { auth, loading } = useAuth();
-
   const router = useRouter();
 
   useEffect(() => {
@@ -101,16 +100,18 @@ const Index = () => {
 
   const submitHandler = async (values, actions) => {
     try {
+      const today = new Date();
       values = {
         ...values,
-        createdAt: new Date(),
-        updatedAt: new Date(),
+        createdAt: today,
+        updatedAt: today,
         questions: values.questions.map(question => {
           return {
             ...question,
-            options: question.options.map(option => {
-              return { ...option, optionId: uuidv4() };
-            }),
+            options: question.options.map(option => ({
+              ...option,
+              optionId: uuidv4(),
+            })),
             questionId: uuidv4(),
           };
         }),
@@ -129,8 +130,7 @@ const Index = () => {
       <Navbar />
       <Container
         maxW="3xl"
-        mt={5}
-        mb={5}
+        my={5}
         borderWidth="1px"
         borderRadius="lg"
         p={6}
@@ -192,7 +192,7 @@ const Index = () => {
                           };
                           return (
                             <div>
-                              {questions.map((_question, index) => {
+                              {questions.map((_question, index: number) => {
                                 return (
                                   <Flex key={index} direction="column">
                                     <FormControl

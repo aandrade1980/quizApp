@@ -12,7 +12,11 @@ import React from 'react';
 import Navbar from '@/common/Navbar';
 import { getAllQuiz, getAllUsers } from '@/utils/db';
 
-const Home = props => {
+interface IHomeProps {
+  quiz: string;
+}
+
+const Home = (props: IHomeProps) => {
   const quiz = JSON.parse(props.quiz);
   const router = useRouter();
 

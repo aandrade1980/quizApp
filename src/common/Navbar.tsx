@@ -3,6 +3,9 @@ import { Box, Divider, Flex, Heading, Link } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { useAuth } from '@/lib/auth';
 
+const newQuizRoute = '/quiz/new';
+const signInRoute = '/signin';
+
 const Navbar: React.FC<{}> = () => {
   const { auth, signOut } = useAuth();
   const router = useRouter();
@@ -18,9 +21,9 @@ const Navbar: React.FC<{}> = () => {
             <Box p={2}>
               <Link
                 p={2}
-                onClick={() => router.push('/quiz/new')}
+                onClick={() => router.push(newQuizRoute)}
                 fontWeight={
-                  router.pathname === '/quiz/new/' ? 'extrabold' : 'normal'
+                  router.pathname === newQuizRoute ? 'extrabold' : 'normal'
                 }
               >
                 Add new quiz
@@ -33,9 +36,9 @@ const Navbar: React.FC<{}> = () => {
             <Box p={2}>
               <Link
                 p={2}
-                onClick={() => router.push('/signin')}
+                onClick={() => router.push(signInRoute)}
                 fontWeight={
-                  router.pathname === '/signin' ? 'extrabold' : 'normal'
+                  router.pathname === signInRoute ? 'extrabold' : 'normal'
                 }
               >
                 Sign In
