@@ -9,8 +9,12 @@ import {
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
+
 import Navbar from '@/common/Navbar';
 import { getAllQuiz, getAllUsers } from '@/utils/db';
+
+import '@/i18n/config';
 
 interface IHomeProps {
   quiz: string;
@@ -19,6 +23,7 @@ interface IHomeProps {
 const Home = (props: IHomeProps) => {
   const quiz = JSON.parse(props.quiz);
   const router = useRouter();
+  const { t } = useTranslation();
 
   const generateQuizCard = singleQuiz => {
     return (
@@ -28,10 +33,10 @@ const Home = (props: IHomeProps) => {
         </Heading>
 
         <Text color="gray.500" mt={2}>
-          Posted By: {singleQuiz.user.name}
+          {t('posted_by')} {singleQuiz.user.name}
         </Text>
         <Text color="gray.500" mt={2}>
-          No of Questions: {singleQuiz.questions.length}
+          {t('number_of_questions')} {singleQuiz.questions.length}
         </Text>
 
         <Divider my={3} />

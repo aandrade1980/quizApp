@@ -1,14 +1,37 @@
 import React from 'react';
-import { Box, Divider, Flex, Heading, Link } from '@chakra-ui/react';
+import { Box, Button, Divider, Flex, Heading, Link } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { useAuth } from '@/lib/auth';
+import { useTranslation } from 'react-i18next';
 
 const newQuizRoute = '/quiz/new';
 const signInRoute = '/signin';
 
+const ChangeLanguage = () => {
+  const { i18n } = useTranslation();
+  const changeLanguage = (language: string) => i18n.changeLanguage(language);
+
+  return (
+    <>
+      <Button
+        size="sm"
+        variant="outline"
+        mr={1}
+        onClick={() => changeLanguage('es')}
+      >
+        Es
+      </Button>
+      <Button size="sm" variant="outline" onClick={() => changeLanguage('en')}>
+        En
+      </Button>
+    </>
+  );
+};
+
 const Navbar: React.FC<{}> = () => {
   const { auth, signOut } = useAuth();
   const router = useRouter();
+  const { t } = useTranslation();
 
   return (
     <>
@@ -26,11 +49,12 @@ const Navbar: React.FC<{}> = () => {
                   router.pathname === newQuizRoute ? 'extrabold' : 'normal'
                 }
               >
-                Add new quiz
+                {t('add_new_quiz')}
               </Link>
               <Link p={2} onClick={() => signOut()}>
-                Logout
+                {t('logout')}
               </Link>
+              <ChangeLanguage />
             </Box>
           ) : (
             <Box p={2}>
@@ -41,8 +65,9 @@ const Navbar: React.FC<{}> = () => {
                   router.pathname === signInRoute ? 'extrabold' : 'normal'
                 }
               >
-                Sign In
+                {t('sign_in')}
               </Link>
+              <ChangeLanguage />
             </Box>
           )}
         </Box>

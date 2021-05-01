@@ -1,0 +1,14 @@
+{
+  "posted_by": "Posteado Por:",
+  "number_of_questions": "Nro de preguntas",
+  "welcome_message": "Hola, Bienvenido a la App de Quiz.",
+  "sign_in_with_google": "Inicia sesión con Google",
+  "correct_answer_for": "Respuesta correcta para",
+  "add_new_quiz": "Agregar nuevo cuestionario",
+  "logout": "Cerrar sesión",
+  "sign_in": "Iniciar sesión",
+  "quiz_title": "Título de la prueba",
+  "quiz_description": "Descripción de la prueba",
+  "enter_your_question_data": "Ingrese los datos de su pregunta:",
+  "question_title": "Título de la pregunta:"
+}

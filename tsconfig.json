@@ -5,7 +5,8 @@
       "@/common/*": ["src/common/*"],
       "@/lib/*": ["src/lib/*"],
       "@/pages/*": ["src/pages/*"],
-      "@/utils/*": ["src/utils/*"]
+      "@/utils/*": ["src/utils/*"],
+      "@/i18n/*": ["src/i18n/*"]
     },
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
