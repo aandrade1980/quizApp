@@ -20,9 +20,10 @@ import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import * as yup from 'yup';
-import Navbar from '../../../common/Navbar';
-import { useAuth } from '../../../lib/auth';
-import { addQuizApi } from '../../../utils/service';
+import Navbar from '@/common/Navbar';
+import { useAuth } from '@/lib/auth';
+import { addQuizApi } from '@/utils/service';
+import { useTranslation } from 'react-i18next';
 
 const optionData = [
   {
@@ -61,6 +62,7 @@ const answerOption = [
 const Index = () => {
   const { auth, loading } = useAuth();
   const router = useRouter();
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (!auth && !loading) {
@@ -149,7 +151,7 @@ const Index = () => {
                     isInvalid={form.errors.title && form.touched.title}
                   >
                     <FormLabel htmlFor="title" fontSize="xl">
-                      Quiz Title
+                      {t('quiz_title')}
                     </FormLabel>
                     <Input {...field} id="title" />
                     <FormErrorMessage>{form.errors.title}</FormErrorMessage>
@@ -164,7 +166,7 @@ const Index = () => {
                     }
                   >
                     <FormLabel htmlFor="description" fontSize="xl" mt={4}>
-                      Quiz description
+                      {t('quiz_description')}
                     </FormLabel>
                     <Textarea {...field} id="description" />
                     <FormErrorMessage>
@@ -177,7 +179,7 @@ const Index = () => {
                 {({ field }) => (
                   <FormControl>
                     <FormLabel htmlFor="questions" fontSize="xl" mt={4}>
-                      Enter your question data:
+                      {t('enter_your_question_data')}
                     </FormLabel>
                     <Box ml={4}>
                       <FieldArray {...field} name="questions" id="questions">
@@ -203,7 +205,7 @@ const Index = () => {
                                       <FormLabel
                                         htmlFor={`questions[${index}][title]`}
                                       >
-                                        Question Title:
+                                        {t('question_title')}
                                       </FormLabel>
                                       <Input
                                         name={`questions[${index}][title]`}

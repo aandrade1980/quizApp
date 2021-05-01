@@ -1,0 +1,14 @@
+{
+  "posted_by": "Posted By:",
+  "number_of_questions": "No of Questions:",
+  "welcome_message": "Hello, Welcome to the Quiz App.",
+  "sign_in_with_google": "Sign In with Google",
+  "correct_answer_for": "Correct Answer for",
+  "add_new_quiz": "Add new quiz",
+  "logout": "Logout",
+  "sign_in": "Sign In",
+  "quiz_title": "Quiz Title",
+  "quiz_description": "Quiz description",
+  "enter_your_question_data": "Enter your question data:",
+  "question_title": "Question Title:"
+}
